@@ -7,6 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Service
 public class EstadoSingletonService {
 
+    // Se usa AtomicInteger para mostrar estado compartido de forma segura.
     private final AtomicInteger ultimoValor = new AtomicInteger(0);
 
     public int actualizar(int valor) {

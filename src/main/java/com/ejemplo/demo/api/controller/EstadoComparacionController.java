@@ -15,6 +15,7 @@ import java.util.Map;
 @RequestMapping("/api/v1/demo/estado")
 public class EstadoComparacionController {
 
+    // SOLUCION EXTRA: comparacion didactica entre bean singleton y clase manual.
     private final EstadoSingletonService estadoSingletonService;
 
     public EstadoComparacionController(EstadoSingletonService estadoSingletonService) {
@@ -23,6 +24,7 @@ public class EstadoComparacionController {
 
     @PostMapping("/singleton/{valor}")
     public ResponseEntity<Map<String, Object>> actualizarSingleton(@PathVariable int valor) {
+        // Bean singleton de Spring: el valor queda persistido para llamadas posteriores.
         int actual = estadoSingletonService.actualizar(valor);
         return ResponseEntity.ok(Map.of(
                 "tipo", "singleton",
@@ -48,6 +50,7 @@ public class EstadoComparacionController {
 
     @PostMapping("/manual/{valor}")
     public ResponseEntity<Map<String, Object>> actualizarManual(@PathVariable int valor) {
+        // Clase sin @Service: se crea con new y su estado no persiste entre requests.
         EstadoManual estadoManual = new EstadoManual();
         estadoManual.setValor(valor);
         return ResponseEntity.ok(Map.of(
@@ -58,6 +61,7 @@ public class EstadoComparacionController {
 
     @GetMapping("/manual")
     public ResponseEntity<Map<String, Object>> obtenerManual() {
+        // Cada llamada inicia en 0 porque es una instancia nueva.
         EstadoManual estadoManual = new EstadoManual();
         return ResponseEntity.ok(Map.of(
                 "tipo", "manual",

@@ -18,6 +18,7 @@ import java.util.Map;
 @RequestMapping("/api/v1")
 public class SaludoController {
 
+    // SOLUCION RETO (pasos 2 y 3): inyeccion por constructor para usar la logica de saludo.
     private final SaludoService saludoService;
 
     public SaludoController(SaludoService saludoService) {
@@ -36,11 +37,13 @@ public class SaludoController {
     public ResponseEntity<SaludoResponse> saludar(
             @RequestParam(defaultValue = "Mundo") String nombre
     ) {
+        // SOLUCION RETO: endpoint GET habilitado.
         return ResponseEntity.ok(saludoService.crearSaludo(nombre));
     }
 
     @PostMapping("/saludos")
     public ResponseEntity<SaludoResponse> saludarPost(@Valid @RequestBody SaludoRequest request) {
+        // SOLUCION RETO: endpoint POST con validacion habilitado.
         return ResponseEntity.ok(saludoService.crearSaludo(request.nombre()));
     }
 }

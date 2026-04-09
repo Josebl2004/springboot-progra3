@@ -16,12 +16,14 @@ public class PrestamoService {
     private static final MathContext MATH_CONTEXT = new MathContext(16, RoundingMode.HALF_UP);
 
     public PrestamoResponse simular(PrestamoRequest request) {
+        // SOLUCION RETO (paso 8): validacion de reglas previas al calculo financiero.
         validarReglas(request);
 
         BigDecimal monto = request.monto();
         int meses = request.meses();
         BigDecimal tasaMensual = request.tasaAnual().divide(CIEN, MATH_CONTEXT).divide(DOCE, MATH_CONTEXT);
 
+        // SOLUCION RETO: formula de cuota fija (amortizacion) solicitada en la actividad.
         double factor = Math.pow(BigDecimal.ONE.add(tasaMensual).doubleValue(), meses);
         BigDecimal numerador = monto.multiply(tasaMensual, MATH_CONTEXT).multiply(BigDecimal.valueOf(factor), MATH_CONTEXT);
         BigDecimal denominador = BigDecimal.valueOf(factor).subtract(BigDecimal.ONE, MATH_CONTEXT);
@@ -34,6 +36,7 @@ public class PrestamoService {
     }
 
     private void validarReglas(PrestamoRequest request) {
+        // SOLUCION RETO: reglas de negocio adicionales (aparte de @Valid en DTO).
         if (request.tasaAnual().compareTo(BigDecimal.valueOf(100)) > 0) {
             throw new IllegalArgumentException("La tasaAnual no puede ser mayor al 100%");
         }

@@ -11,6 +11,7 @@ public class OpenApiConfig {
 
     @Bean
     public OpenAPI openAPI() {
+        // SOLUCION RETO (paso 7): metadata de Swagger/OpenAPI para documentar la API.
         return new OpenAPI()
                 .info(new Info()
                         .title("Spring Boot API Demo Progra 3")
