@@ -260,3 +260,19 @@ La consulta devuelve `0`, porque cada endpoint crea una instancia nueva.
 - [ ] Endpoint nuevo implementado
 - [ ] Tests del endpoint nuevo en verde
 - [ ] Pruebas pasando (`mvn test`)
+
+---
+
+## Incremento progresivo (semana 13 al 17 de abril)
+
+Como siguiente etapa del curso, este proyecto incorpora un incremento progresivo enfocado en persistencia con JPA.
+
+- Periodo de trabajo: **del 13 al 17 de abril**.
+- Guia oficial del incremento: [`TareaJpa.md`](TareaJpa.md).
+- Alcance general:
+  - Integrar Spring Data JPA.
+  - Configurar base de datos (PostgreSQL en la tarea principal).
+  - Modelar 2 entidades relacionadas.
+  - Exponer 2 APIs con CRUD completo y buenas practicas.
+
+Recomendacion para clase: pueden realizar una demo inicial con H2 para reducir friccion de entorno, y luego completar la entrega final siguiendo los lineamientos de `TareaJpa.md`.
