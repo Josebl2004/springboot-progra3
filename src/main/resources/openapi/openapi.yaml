@@ -1,0 +1,128 @@
+openapi: 3.0.3
+
+info:
+  title: Spring Boot API Demo
+  version: 1.0.0
+  description: API workshop Programacion 3
+
+servers:
+  - url: http://localhost:8081
+
+tags:
+  - name: workshop
+  - name: simulaciones
+  - name: categorias
+  - name: productos
+
+paths:
+
+  /api/v1:
+    get:
+      tags:
+        - workshop
+      operationId: getWorkshopHealth
+      responses:
+        '200':
+          description: OK
+
+  /api/v1/categorias:
+    get:
+      tags:
+        - categorias
+      operationId: listarCategorias
+      responses:
+        '200':
+          description: OK
+
+    post:
+      tags:
+        - categorias
+      operationId: crearCategoria
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoriaRequest'
+      responses:
+        '201':
+          description: CREATED
+
+  /api/v1/categorias/{id}:
+    get:
+      tags:
+        - categorias
+      operationId: obtenerCategoria
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+
+    put:
+      tags:
+        - categorias
+      operationId: actualizarCategoria
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoriaRequest'
+      responses:
+        '200':
+          description: OK
+
+    delete:
+      tags:
+        - categorias
+      operationId: eliminarCategoria
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: NO CONTENT
+
+components:
+
+  schemas:
+
+    CategoriaRequest:
+      type: object
+      properties:
+        nombre:
+          type: string
+        descripcion:
+          type: string
+        estado:
+          type: boolean
+
+    CategoriaResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        nombre:
+          type: string
+        descripcion:
+          type: string
+        estado:
+          type: boolean
